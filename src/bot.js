@@ -113,6 +113,23 @@ function processCommand(command,discord_name){
     }
 }
 
+function meme_on_og(content){
+    let reply = "";
+    let count = 0;
+    for ( var i=0; i<content.length; i++ ){
+        if ( count % 2 == 0 ){
+            reply+=content.charAt(i).toUpperCase();
+        }else{
+            reply+=content.charAt(i);
+        }
+        if ( content.charAt(i) != " " ){
+            count+=1;
+        }
+
+    }
+    return reply;
+}
+
 client.on('ready' , () =>{
     console.log('This bot is online');
 })
@@ -122,24 +139,16 @@ client.on('message', (msg) => {
     if ( msg.author == client.user ){
         return
     }
-    console.log(msg.author.username);
+    
     if ( msg.author.username == "chef"){
         let content = msg.content.toString();
-        let reply = "*";
-        let count = 0;
-        for ( var i=0; i<content.length; i++ ){
-            if ( count % 2 == 0 ){
-                reply+=content.charAt(i).toUpperCase();
-            }else{
-                reply+=content.charAt(i);
-            }
-            if ( content.charAt(i) != " " ){
-                count+=1;
-            }
-
+        if ( content.includes("pls") || content.includes("Pls") ){
+            return
         }
-        msg.channel.send(reply+="*")
+        reply = meme_on_og(content)
+        msg.channel.send(reply)
     }
+
     curr_msg = msg;
     console.log(msg.member.user.tag);
 
