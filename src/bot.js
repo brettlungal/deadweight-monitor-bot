@@ -122,6 +122,24 @@ client.on('message', (msg) => {
     if ( msg.author == client.user ){
         return
     }
+    console.log(msg.author.username);
+    if ( msg.author.username == "chef"){
+        let content = msg.content.toString();
+        let reply = "*";
+        let count = 0;
+        for ( var i=0; i<content.length; i++ ){
+            if ( count % 2 == 0 ){
+                reply+=content.charAt(i).toUpperCase();
+            }else{
+                reply+=content.charAt(i);
+            }
+            if ( content.charAt(i) != " " ){
+                count+=1;
+            }
+
+        }
+        msg.channel.send(reply+="*")
+    }
     curr_msg = msg;
     console.log(msg.member.user.tag);
 
